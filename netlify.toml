@@ -3,14 +3,14 @@
   command = "pnpm install && pnpm run build"
   publish = "dist/public"
 
-# SPA redirect - all routes go to index.html for client-side routing
-# But exclude files with extensions (assets, images, etc.)
+# SPA redirect - only redirect routes without file extensions
+# This allows static assets to be served directly
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = true
-  conditions = { NOT = [{Url = "(?i)\\.(js|css|svg|png|jpg|jpeg|gif|ico|woff|woff2|ttf|eot|webp|map)$"}] }
+  # Only apply redirect to routes that don't have a file extension (no dot)
+  conditions = {NOT = {Path = "/*.*"}}
 
 [context.production.environment]
   NODE_VERSION = "22"
