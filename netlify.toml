@@ -4,11 +4,13 @@
   publish = "dist/public"
 
 # SPA redirect - all routes go to index.html for client-side routing
+# But exclude files with extensions (assets, images, etc.)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
   force = true
+  conditions = { NOT = [{Url = "(?i)\\.(js|css|svg|png|jpg|jpeg|gif|ico|woff|woff2|ttf|eot|webp|map)$"}] }
 
 [context.production.environment]
   NODE_VERSION = "22"
