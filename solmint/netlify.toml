@@ -1,4 +1,5 @@
 [build]
+  base = "solmint"
   command = "pnpm install && pnpm run build"
   publish = "dist/public"
 
