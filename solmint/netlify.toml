@@ -1,12 +1,13 @@
 [build]
   command = "pnpm install && pnpm run build"
   publish = "dist/public"
-  functions = "netlify/functions"
 
+# SPA redirect - all routes go to index.html for client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = true
 
 [context.production.environment]
   NODE_VERSION = "22"
