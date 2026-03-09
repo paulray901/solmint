@@ -169,9 +169,9 @@ const plugins = [
 ];
 
 export default defineConfig({
-  // Base path for GitHub Pages deployment
-  // Set to "/solmint/" for GitHub Pages, or "/" for custom domain
-  base: process.env.VITE_BASE_PATH || "/solmint/",
+  // Base path for deployment
+  // Default to "/" for root domain (Netlify), can be overridden with VITE_BASE_PATH env var
+  base: process.env.VITE_BASE_PATH || "/",
   plugins,
   resolve: {
     alias: {
