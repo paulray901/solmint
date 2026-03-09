@@ -3,14 +3,29 @@
   command = "pnpm install && pnpm run build"
   publish = "dist/public"
 
-# SPA redirect - only redirect routes without file extensions
-# This allows static assets to be served directly
+# SPA redirect - redirect all non-file requests to index.html
+# The key is to NOT redirect requests that have a file extension
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/launch"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/my-tokens"
+  to = "/index.html"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  # Only apply redirect to routes that don't have a file extension (no dot)
-  conditions = {NOT = {Path = "/*.*"}}
+  # Skip if the URL has a file extension (contains a dot)
+  conditions = {NOT = {Path = "*.*"}}
 
 [context.production.environment]
   NODE_VERSION = "22"
